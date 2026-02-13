@@ -489,17 +489,58 @@
         let selectedFile = null;
         let selectedFormat = 'pdf';
         
-		let isDownloading = false;
+		let downloadInProgress = false;
 		
 		function downloadTemplate() {
-		    if (isDownloading) return;
+		    // Prevent multiple downloads
+		    if (downloadInProgress) return;
 		    
-		    isDownloading = true;
-		    window.location.href = `${API_URL}/template`;
+		    downloadInProgress = true;
 		    
-		    setTimeout(() => {
-		        isDownloading = false;
-		    }, 2000);
+		    // Get button and update UI
+		    const btn = document.querySelector('button[onclick="downloadTemplate()"]');
+		    if (btn) {
+		        btn.disabled = true;
+		        btn.style.opacity = '0.6';
+		        const originalText = btn.innerHTML;
+		        btn.innerHTML = '⏳ Downloading...';
+		        
+		        setTimeout(() => {
+		            btn.disabled = false;
+		            btn.style.opacity = '1';
+		            btn.innerHTML = originalText;
+		        }, 5000);
+		    }
+		    
+		    // Download using fetch + blob (Safari compatible)
+		    fetch(`${API_URL}/template`)
+		        .then(response => {
+		            if (!response.ok) throw new Error('Download failed');
+		            return response.blob();
+		        })
+		        .then(blob => {
+		            const url = window.URL.createObjectURL(blob);
+		            const a = document.createElement('a');
+		            a.href = url;
+		            a.download = 'Resume_Creator.xlsx';
+		            a.style.display = 'none';
+		            document.body.appendChild(a);
+		            a.click();
+		            
+		            setTimeout(() => {
+		                document.body.removeChild(a);
+		                window.URL.revokeObjectURL(url);
+		            }, 100);
+		        })
+		        .catch(error => {
+		            console.error('Download error:', error);
+		            showStatus('error', '❌ Download failed. Please try again.');
+		        })
+		        .finally(() => {
+		            setTimeout(() => {
+		                downloadInProgress = false;
+		            }, 5000);
+		        });
 		}
         
         function handleFileSelect(event) {
