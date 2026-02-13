@@ -574,18 +574,40 @@
             }
         }
         
-        async function downloadFile(url, filename) {
-            const response = await fetch(`${API_URL}${url}`);
-            const blob = await response.blob();
-            const downloadUrl = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = downloadUrl;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(downloadUrl);
-            document.body.removeChild(a);
-        }
+		async function downloadFile(url, filename) {
+		    try {
+		        const response = await fetch(`${API_URL}${url}`);
+		        if (!response.ok) throw new Error('Download failed');
+		        
+		        const blob = await response.blob();
+		        
+		        // Force correct MIME type
+		        const mimeType = filename.endsWith('.pdf') 
+		            ? 'application/pdf' 
+					            : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+		        
+		        const properBlob = new Blob([blob], { type: mimeType });
+		        const downloadUrl = window.URL.createObjectURL(properBlob);
+		        
+		        const a = document.createElement('a');
+		        a.href = downloadUrl;
+		        a.download = filename;
+		        a.style.display = 'none';
+		        
+		        document.body.appendChild(a);
+		        a.click();
+		        
+		        // Cleanup after brief delay
+		        setTimeout(() => {
+		            window.URL.revokeObjectURL(downloadUrl);
+		            document.body.removeChild(a);
+		        }, 100);
+		        
+		    } catch (error) {
+		        console.error('Download error:', error);
+		        throw error;
+		    }
+		}	
         
         function showStatus(type, message) {
             const statusDiv = document.getElementById('status');
