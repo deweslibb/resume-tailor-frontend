@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Resume Generator</title>
+    <title>ResumeDJ - Remix Your Resume</title>
     <style>
         * {
             margin: 0;
@@ -12,86 +12,205 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #32353c;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #1588fc;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: #000000;
+            color: #ffffff;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-logo {
+            max-width: 600px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 1.5rem;
+            display: block;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            background: #f8f9fa;
+            padding: 4rem 2rem;
         }
         
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 100%;
-            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 2em;
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #32353c;
         }
         
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 0.95em;
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
         
-        .step {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
+        .step-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
         }
         
         .step-number {
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
+            background: #1588fc;
+            color: #ffffff;
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            margin-right: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+        
+        .step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #32353c;
+        }
+        
+        .step-card p {
+            color: #454545;
+            font-size: 0.95rem;
+        }
+        
+        /* Generator Section */
+        .generator {
+            padding: 4rem 2rem;
+            background: #ffffff;
+        }
+        
+        .generator-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .step-box {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-badge {
+            background: #32353c;
+            color: #ffffff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-right: 1rem;
+            font-size: 1.1rem;
         }
         
         .step-title {
-            display: inline-block;
+            font-size: 1.4rem;
+            color: #32353c;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1em;
         }
         
         .btn {
-            background: #667eea;
-            color: white;
+            background: #1588fc;
+            color: #ffffff;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1em;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
             font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
         }
         
         .btn:hover {
-            background: #5568d3;
+            background: #0d6ecc;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(21, 136, 252, 0.3);
         }
         
         .btn:disabled {
-            background: #ccc;
+            background: #b0b0b0;
             cursor: not-allowed;
             transform: none;
         }
@@ -99,8 +218,8 @@
         .file-input-wrapper {
             position: relative;
             overflow: hidden;
-            display: inline-block;
-            width: 100%;
+            display: block;
+            margin-bottom: 1rem;
         }
         
         .file-input-wrapper input[type=file] {
@@ -110,62 +229,65 @@
         
         .file-input-label {
             display: block;
-            padding: 12px 30px;
-            background: white;
-            border: 2px dashed #667eea;
-            border-radius: 8px;
+            padding: 1rem;
+            background: #ffffff;
+            border: 2px dashed #1588fc;
+            border-radius: 6px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            color: #667eea;
+            color: #1588fc;
             font-weight: 600;
         }
         
         .file-input-label:hover {
-            background: #f8f9ff;
-            border-color: #5568d3;
+            background: #f0f8ff;
+            border-color: #0d6ecc;
         }
         
         .file-name {
-            margin-top: 10px;
-            color: #666;
-            font-size: 0.9em;
+            margin-top: 0.5rem;
+            color: #454545;
+            font-size: 0.9rem;
             text-align: center;
         }
         
         .format-selector {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 1rem;
+            margin-top: 1rem;
         }
         
         .format-option {
             flex: 1;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
+            background: #ffffff;
+            font-weight: 500;
         }
         
         .format-option:hover {
-            border-color: #667eea;
+            border-color: #1588fc;
+            background: #f0f8ff;
         }
         
         .format-option.selected {
-            border-color: #667eea;
-            background: #f8f9ff;
-            color: #667eea;
-            font-weight: 600;
+            border-color: #1588fc;
+            background: #1588fc;
+            color: #ffffff;
         }
         
         .status {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
             text-align: center;
             display: none;
+            font-weight: 500;
         }
         
         .status.success {
@@ -192,78 +314,173 @@
             height: 20px;
             border: 3px solid rgba(0, 0, 0, 0.1);
             border-radius: 50%;
-            border-top-color: #667eea;
+            border-top-color: #1588fc;
             animation: spin 1s linear infinite;
             margin-right: 10px;
+            vertical-align: middle;
         }
         
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Footer */
+        footer {
+            background: #32353c;
+            color: #ffffff;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        footer a {
+            color: #1588fc;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-logo {
+                max-width: 90%;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .format-selector {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📄 Resume Generator</h1>
-        <p class="subtitle">Create your professional ATS-friendly resume in 3 easy steps</p>
-        
-        <!-- Step 1: Download Template -->
-        <div class="step">
-            <div>
-                <span class="step-number">1</span>
-                <span class="step-title">Download Template</span>
-            </div>
-            <p style="color: #666; margin-bottom: 15px;">Get the Excel template and fill it out with your information</p>
-            <button class="btn" onclick="downloadTemplate()">⬇️ Download Excel Template</button>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="ResumeDJ _Web.png" alt="ResumeDJ">
+            </a>
+            <ul class="nav-links">
+                <li><a href="instructions.html">Instructions</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-        
-        <!-- Step 2: Upload Filled Template -->
-        <div class="step">
-            <div>
-                <span class="step-number">2</span>
-                <span class="step-title">Upload Your Resume</span>
-            </div>
-            <p style="color: #666; margin-bottom: 15px;">Upload the completed Excel template</p>
-            <div class="file-input-wrapper">
-                <input type="file" id="fileInput" accept=".xlsx,.xlsm" onchange="handleFileSelect(event)">
-                <label for="fileInput" class="file-input-label">
-                    📁 Choose Excel File
-                </label>
-            </div>
-            <div class="file-name" id="fileName"></div>
-        </div>
-        
-        <!-- Step 3: Generate Resume -->
-        <div class="step">
-            <div>
-                <span class="step-number">3</span>
-                <span class="step-title">Generate Resume</span>
-            </div>
-            <p style="color: #666; margin-bottom: 15px;">Choose your preferred format</p>
-            
-            <div class="format-selector">
-                <div class="format-option selected" data-format="pdf" onclick="selectFormat('pdf')">
-                    📕 PDF
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="ResumeDJ_Logo.png" alt="ResumeDJ - Professional Resume Generator" class="hero-logo">
+        <p>Remix your resume in minutes to be ATS-friendly and catered directly to the role you want. No more battling formatting. Save everything about YOU in the template and you decide what to include for each version.</p>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Download Template</h3>
+                    <p>Get our Excel template with all the fields you need</p>
                 </div>
-                <div class="format-option" data-format="docx" onclick="selectFormat('docx')">
-                    📘 Word
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Fill Your Info</h3>
+                    <p>Complete the template with your experience and skills</p>
                 </div>
-                <div class="format-option" data-format="both" onclick="selectFormat('both')">
-                    📦 Both
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Generate Resume</h3>
+                    <p>Upload and get your professional resume in seconds</p>
                 </div>
             </div>
-            
-            <button class="btn" id="generateBtn" onclick="generateResume()" disabled style="margin-top: 15px;">
-                ✨ Generate Resume
-            </button>
         </div>
-        
-        <!-- Status Messages -->
-        <div class="status" id="status"></div>
-    </div>
-    
+    </section>
+
+    <!-- Generator -->
+    <section class="generator">
+        <div class="generator-container">
+            <!-- Step 1: Download -->
+            <div class="step-box">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-title">Download Template</div>
+                </div>
+                <p style="margin-bottom: 1rem; color: #454545;">Get started with our professionally designed Excel template</p>
+                <button class="btn" onclick="downloadTemplate()">⬇️ Download Excel Template</button>
+            </div>
+
+            <!-- Step 2: Upload -->
+            <div class="step-box">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-title">Upload Your Resume</div>
+                </div>
+                <p style="margin-bottom: 1rem; color: #454545;">Upload your completed Excel file</p>
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileInput" accept=".xlsx,.xlsm" onchange="handleFileSelect(event)">
+                    <label for="fileInput" class="file-input-label">
+                        📁 Choose Excel File
+                    </label>
+                </div>
+                <div class="file-name" id="fileName"></div>
+            </div>
+
+            <!-- Step 3: Generate -->
+            <div class="step-box">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-title">Generate Resume</div>
+                </div>
+                <p style="margin-bottom: 1rem; color: #454545;">Choose your preferred format</p>
+                
+                <div class="format-selector">
+                    <div class="format-option selected" data-format="pdf" onclick="selectFormat('pdf')">
+                        📕 PDF
+                    </div>
+                    <div class="format-option" data-format="docx" onclick="selectFormat('docx')">
+                        📘 Word
+                    </div>
+                    <div class="format-option" data-format="both" onclick="selectFormat('both')">
+                        📦 Both
+                    </div>
+                </div>
+                
+                <button class="btn" id="generateBtn" onclick="generateResume()" disabled style="margin-top: 1.5rem;">
+                    ✨ Generate Resume
+                </button>
+
+                <div class="status" id="status"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 ResumeDJ. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="#privacy">Privacy</a> · 
+            <a href="#terms">Terms</a> · 
+            <a href="#contact">Contact</a>
+        </p>
+    </footer>
+
     <script>
-        const API_URL = 'https://resume-tailor-6p1i.onrender.com';
+        const API_URL = 'http://localhost:8000';
         let selectedFile = null;
         let selectedFormat = 'pdf';
         
@@ -288,7 +505,6 @@
         function selectFormat(format) {
             selectedFormat = format;
             
-            // Update UI
             document.querySelectorAll('.format-option').forEach(option => {
                 option.classList.remove('selected');
             });
@@ -326,7 +542,6 @@
                     throw new Error(result.error || 'Generation failed');
                 }
                 
-                // Download files separately
                 let downloadCount = 0;
                 
                 if (result.files.pdf) {
@@ -335,7 +550,6 @@
                 }
                 
                 if (result.files.docx) {
-                    // Small delay between downloads
                     if (downloadCount > 0) await new Promise(r => setTimeout(r, 500));
                     await downloadFile(result.files.docx, `${result.name}_Resume.docx`);
                     downloadCount++;
@@ -346,7 +560,7 @@
                 }
                 
                 const fileText = downloadCount === 1 ? 'file' : 'files';
-                showStatus('success', `✅ Resume generated! ${downloadCount} ${fileText} downloaded. Check your downloads folder.`);
+                showStatus('success', `✅ Resume generated! ${downloadCount} ${fileText} downloaded.`);
                 
             } catch (error) {
                 showStatus('error', `❌ Error: ${error.message}`);
