@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructions - ResumeDJ</title>
     <style>
-        * {
+		html {
+			overflow-y: scroll; /* Forces scrollbar to always show */
+		}
+		
+		* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -45,11 +49,13 @@
             width: auto;
         }
         
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+		.nav-links {
+			display: flex;
+			gap: 2rem;
+			list-style: none;
+			margin: 0; /* This forces alignment to match other pages */
+			padding: 0;
+		}
         
         .nav-links a {
             color: #000000;
@@ -63,7 +69,7 @@
         }
         
         .page-header {
-            background: linear-gradient(135deg, #32353c 0%, #454545 100%);
+            background: #000000;
             color: #ffffff;
             padding: 3rem 2rem;
             text-align: center;
@@ -153,10 +159,10 @@
             font-weight: 600;
         }
         
-        ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
+		ul, ol {
+			margin-left: 1.5rem;
+			margin-bottom: 1rem;
+		}
         
         li {
             margin-bottom: 0.5rem;

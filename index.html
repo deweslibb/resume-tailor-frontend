@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ResumeDJ - Remix Your Resume</title>
     <style>
-        * {
+        html {
+			overflow-y: scroll; /* Forces scrollbar to always show */
+		}
+		
+		* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -374,9 +378,10 @@
                 <img src="ResumeDJ _Web.png" alt="ResumeDJ">
             </a>
             <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
                 <li><a href="instructions.html">Instructions</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -480,7 +485,7 @@
     </footer>
 
     <script>
-        const API_URL = 'http://localhost:8000';
+        const API_URL = 'https://api.resumedj.com';
         let selectedFile = null;
         let selectedFormat = 'pdf';
         
