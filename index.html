@@ -489,9 +489,18 @@
         let selectedFile = null;
         let selectedFormat = 'pdf';
         
-        function downloadTemplate() {
-            window.location.href = `${API_URL}/template`;
-        }
+		let isDownloading = false;
+		
+		function downloadTemplate() {
+		    if (isDownloading) return;
+		    
+		    isDownloading = true;
+		    window.location.href = `${API_URL}/template`;
+		    
+		    setTimeout(() => {
+		        isDownloading = false;
+		    }, 2000);
+		}
         
         function handleFileSelect(event) {
             selectedFile = event.target.files[0];
